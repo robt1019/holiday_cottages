@@ -1,0 +1,23 @@
+<h1>Home Farm Cottages</h1>
+<h2>Cottages:</h2>
+<div ng-repeat="cottage in cottages">
+    <p>Name: {{cottage.name}}</p>
+    <p>Reserved: {{cottage.reserved}}</p>
+    <form ng-submit="reserveCottage(cottage)">
+        <input ng-disabled="cottage.reserved" type="submit" value="Reserve"></input>
+    </form>
+</div>
+<div>
+    <h2>Add a cottage</h2>
+    <form ng-submit="addCottage(data.newCottage)">
+        <input type="text" name="cottageName" ng-model="data.newCottage.name"></input>
+        <input type="submit"></input>
+    </form>
+</div>
+<div>
+    <h2>What date do you want a cottage?</h2>
+    <form ng-submit="getCottagesByDate(data.cottageReservation.date)">
+        <input type="date" name="cottageDate" ng-model="data.cottageReservation.date"></input>
+        <input type="submit"></input>
+    </form>
+</div>
