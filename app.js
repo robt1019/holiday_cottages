@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/hfc');
 require('./models/Cottage');
-require('./models/Date');       
+require('./models/CottageDate');       
 
 var routes = require('./routes/index');
 

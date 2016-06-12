@@ -1,6 +1,6 @@
 <h1>Home Farm Cottages</h1>
 <h2>Cottages:</h2>
-<div ng-repeat="cottage in cottages">
+<div ng-repeat="cottage in data.cottageDate.cottages">
     <p>Name: {{cottage.name}}</p>
     <p>Reserved: {{cottage.reserved}}</p>
     <form ng-submit="reserveCottage(cottage)">
@@ -8,16 +8,29 @@
     </form>
 </div>
 <div>
-    <h2>Add a cottage</h2>
+    <h2>What date do you want a cottage?</h2>
+    <form ng-submit="getCottageDateByDate(data.cottageReservation.date)">
+        <input type="date" name="cottageDate" ng-model="data.cottageReservation.date"></input>
+        <input type="submit"></input>
+    </form>
+</div>
+<div>
+    <h2>Add a Cottage</h2>
     <form ng-submit="addCottage(data.newCottage)">
         <input type="text" name="cottageName" ng-model="data.newCottage.name"></input>
         <input type="submit"></input>
     </form>
 </div>
 <div>
-    <h2>What date do you want a cottage?</h2>
-    <form ng-submit="getCottagesByDate(data.cottageReservation.date)">
-        <input type="date" name="cottageDate" ng-model="data.cottageReservation.date"></input>
+    <h2>Add a CottageDate</h2>
+    <form ng-submit="addCottageDate(data.newCottageDate)">
+        <input type="date" name="newCottageDate" ng-model="data.newCottageDate.date"></input>
+        <div ng-repeat="cottage in data.cottages">
+            <span>{{cottage.name}}</span>
+            <input type="checkbox" ng-change="addRemoveCottage(cottage._id, $index, data.cottageShouldBeAdded[$index])" ng-model="data.cottageShouldBeAdded[$index]">
+            </input>
+        </div>
         <input type="submit"></input>
     </form>
 </div>
+{{data.cottageDates}}

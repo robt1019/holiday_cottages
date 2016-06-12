@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var CottageSchema = new mongoose.Schema({
     name: String,
-    reserved: Boolean
+    reserved: Boolean,
 });
 
 mongoose.model('Cottage', CottageSchema);
