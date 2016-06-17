@@ -15,6 +15,7 @@ router.get('/cottages', function(req, res, next) {
 });
 
 router.post('/cottages', function(req, res, next) {
+    console.log(req);
     var cottage = new Cottage(req.body);
     cottage.save(function(err, cottage) {
         if (err) {
@@ -35,23 +36,22 @@ router.post('/cottageDates', function(req, res, next) {
 });
 
 router.get('/cottageDates', function(req, res, next) {
-    CottageDate.find(function(err, cottageDates) {
-        if (err) {
-            return next(err);
-        }
-        res.json(cottageDates);
-    });
+    if (req.query && req.query.date) {
+        var queryDate = req.query.date;
+        CottageDate.find({ _id: req.query.date }, function(err, cottageDates) {
+            if (err) {
+                return next(err);
+            }
+            res.json(cottageDates);
+        });
+    } else {
+        CottageDate.find(function(err, cottageDates) {
+            if (err) {
+                return next(err);
+            }
+            res.json(cottageDates);
+        });
+    }
 });
-
-router.get('/cottageDates/:date', function(req, res, next) {
-    CottageDate.find({ date: date }, function(err, cottages) {
-        if (err) {
-            return next(err);
-        }
-        res.json(cottages);
-    });
-});
-
-
 
 module.exports = router;

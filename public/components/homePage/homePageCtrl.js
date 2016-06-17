@@ -11,19 +11,25 @@
                     data: cottage
                 }).then(function successCallback(response) {
                     window.alert('cottage added');
-                    updatePage();
+                    $scope.updatePage();
                 }, function errorCallback(reason) {
                     window.alert('couldn\'t add cottage: ' + reason.data);
                 });
             };
 
             $scope.addCottageDate = function(cottageDate) {
+                for (var i = 0; i < cottageDate.cottages.length; i++) {
+                    cottageDate.cottages.splice(i, 1, {
+                        name: cottageDate.cottages[i].name,
+                        reserved: cottageDate.cottages[i].reserved
+                    });
+                }
                 $http({
                     method: 'POST',
                     url: '/cottageDates',
                     data: cottageDate
                 }).then(function successCallback(response) {
-                    updatePage();
+                    $scope.updatePage();
                 }, function errorCallback(reason) {
                     window.alert('couldn\'t add cottage date: ' + reason.data);
                 });
@@ -32,26 +38,26 @@
             $scope.getCottageDateByDate = function(date) {
                 $http({
                     method: 'GET',
-                    url: 'cottageDates/',
+                    url: '/cottageDates',
                     params: { date: date },
                 }).then(
                     function successCallback(response) {
-                        $scope.data.cottageDate = response.data;
+                        $scope.data.cottageDate = response.data[0];
                     },
                     function errorCallback(reason) {
                         window.alert('couldn\'t get cottageDates: ' + reason.data);
                     });
             };
 
-            $scope.addRemoveCottage = function(cottageId, index, cottageShouldBeAdded) {
+            $scope.addRemoveCottage = function(cottage, index, cottageShouldBeAdded) {
                 if (cottageShouldBeAdded) {
-                    $scope.data.newCottageDate.cottages.splice(index, 0, cottageId);
+                    $scope.data.newCottageDate.cottages.splice(index, 0, cottage);
                 } else {
                     $scope.data.newCottageDate.cottages.splice(index, 1);
                 }
             };
 
-            function updatePage() {
+            $scope.updatePage = function() {
                 $http({
                     method: 'GET',
                     url: '/cottageDates'
@@ -68,7 +74,7 @@
                 }, function errorCallback(reason) {
                     window.alert('couldn\'t get cottages: ' + reason.data);
                 });
-            }
+            };
 
             function initialise() {
                 $scope.data = {
@@ -76,11 +82,11 @@
                         date: new Date()
                     },
                     newCottageDate: {
-                        date: new Date(),
+                        _id: new Date(),
                         cottages: []
                     }
                 };
-                updatePage();
+                $scope.updatePage();
             }
 
             initialise();

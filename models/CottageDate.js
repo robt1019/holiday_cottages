@@ -3,8 +3,8 @@ var Schema = mongoose.Schema;
 var Cottage = mongoose.model('Cottage');
 
 var CottageDateSchema = new mongoose.Schema({
-    date: Date,
-    cottages: [{ type: Schema.Types.ObjectId, ref: Cottage }]
+    _id: Date,
+    cottages: [{ name: String, reserved: Boolean }]
 });
 
 mongoose.model('CottageDate', CottageDateSchema);
