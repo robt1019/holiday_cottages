@@ -1,7 +1,7 @@
 (function() {
     'use strict';
-    angular.module('hfc').controller('HomePageCtrl', ['$scope', '$http',
-        function($scope, $http) {
+    angular.module('hfc').controller('HomePageCtrl', ['$scope', '$http', '$filter',
+        function($scope, $http, $filter) {
 
             $scope.addCottage = function(cottage) {
                 cottage.reserved = false;
@@ -18,6 +18,7 @@
             };
 
             $scope.addCottageDate = function(cottageDate) {
+                cottageDate._id = $filter('date')(cottageDate._id, 'yyyy-MM-dd');
                 for (var i = 0; i < cottageDate.cottages.length; i++) {
                     cottageDate.cottages.splice(i, 1, {
                         name: cottageDate.cottages[i].name,
@@ -39,7 +40,7 @@
                 $http({
                     method: 'GET',
                     url: '/cottageDates',
-                    params: { date: date },
+                    params: { date: $filter('date')(date, 'yyyy-MM-dd') },
                 }).then(
                     function successCallback(response) {
                         $scope.data.cottageDate = response.data[0];

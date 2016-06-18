@@ -115,5 +115,10 @@ describe('HomePageCtrl', function() {
             $httpBackend.flush();
             expect(scope.data.cottageDate).toEqual('one');
         });
+        it('should call window.alert with sensible argument if $http call is unsuccessful', function() {
+            $httpBackend.expect('GET', '/cottageDates?date=' + date).respond(500, 'blah');
+            $httpBackend.flush();
+            expect(window.alert).toHaveBeenCalledWith('couldn\'t get cottageDates: ' + 'blah');
+        });
     });
 });
