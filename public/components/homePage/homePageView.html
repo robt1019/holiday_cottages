@@ -3,14 +3,14 @@
 <div ng-repeat="cottage in data.cottageDate.cottages">
     <p>Name: {{cottage.name}}</p>
     <p>Reserved: {{cottage.reserved}}</p>
-    <form ng-submit="reserveCottage(cottage)">
+    <form ng-submit="reserveCottageByDate(cottage.name, data.cottageDate._id)">
         <input ng-disabled="cottage.reserved" type="submit" value="Reserve"></input>
     </form>
 </div>
 <div>
     <h2>What date do you want a cottage?</h2>
-    <form ng-submit="getCottageDateByDate(data.cottageReservation.date)">
-        <input type="date" name="cottageDate" ng-model="data.cottageReservation.date"></input>
+    <form ng-submit="getCottageDateByDate(data.cottageDate._id)">
+        <input type="date" name="cottageDate" ng-model="data.cottageDate._id"></input>
         <input type="submit"></input>
     </form>
 </div>
@@ -27,7 +27,7 @@
         <input type="date" name="newCottageDate" ng-model="data.newCottageDate._id"></input>
         <div ng-repeat="cottage in data.cottages">
             <span>{{cottage.name}}</span>
-            <input type="checkbox" ng-change="addRemoveCottage(cottage, $index, data.cottageShouldBeAdded[$index])" ng-model="data.cottageShouldBeAdded[$index]">
+            <input type="checkbox" ng-change="updateCottageDateArray(cottage, data.cottageShouldBeAdded[$index])" ng-model="data.cottageShouldBeAdded[$index]">
             </input>
         </div>
         <input type="submit"></input>

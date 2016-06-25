@@ -11,7 +11,7 @@ mongoose.connect('mongodb://localhost/hfc');
 require('./models/Cottage');
 require('./models/CottageDate');       
 
-var routes = require('./routes/index');
+var routes = require('./routes/homePage');
 
 var app = express();
 

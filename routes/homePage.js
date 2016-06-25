@@ -15,7 +15,6 @@ router.get('/cottages', function(req, res, next) {
 });
 
 router.post('/cottages', function(req, res, next) {
-    console.log(req);
     var cottage = new Cottage(req.body);
     cottage.save(function(err, cottage) {
         if (err) {
@@ -35,10 +34,27 @@ router.post('/cottageDates', function(req, res, next) {
     });
 });
 
+router.put('/cottageDates', function(req, res, next) {
+    CottageDate.findOne({ _id: req.query.date }, function(err, cottageDate) {
+        if (err) {
+            return next(err);
+        }
+        if (cottageDate.cottages) {
+            for (var i = 0; i < cottageDate.cottages.length; i++) {
+                if ((cottageDate.cottages[i].name === req.query.cottageName) &&
+                    (cottageDate.cottages[i].reserved === false)) {
+                    cottageDate.cottages[i].reserved = true;
+                }
+            }
+            cottageDate.save();
+            res.json(cottageDate);
+        }
+    });
+});
+
 router.get('/cottageDates', function(req, res, next) {
     if (req.query && req.query.date) {
-        var queryDate = req.query.date;
-        CottageDate.find({ _id: req.query.date }, function(err, cottageDates) {
+        CottageDate.findOne({ _id: req.query.date }, function(err, cottageDates) {
             if (err) {
                 return next(err);
             }
