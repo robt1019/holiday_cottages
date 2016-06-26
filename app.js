@@ -11,7 +11,7 @@ mongoose.connect('mongodb://localhost/hfc');
 require('./models/Cottage');
 require('./models/CottageDate');       
 
-var routes = require('./routes/homePage');
+var routes = require('./routes/homePageRoutes');
 
 var app = express();
 
@@ -25,7 +25,6 @@ app.use('/bower_components', express.static(path.join(__dirname, 'bower_componen
 app.use('/', routes);
 
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '../client'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

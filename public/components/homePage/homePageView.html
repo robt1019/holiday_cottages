@@ -1,5 +1,5 @@
 <h1>Home Farm Cottages</h1>
-<h2>Cottages:</h2>
+<h2 ng-show="data.cottageDate.cottages.length > 0">Cottages For your date ({{data.cottageDate._id | date: 'dd-MM-yyyy'}}):</h2>
 <div ng-repeat="cottage in data.cottageDate.cottages">
     <p>Name: {{cottage.name}}</p>
     <p>Reserved: {{cottage.reserved}}</p>

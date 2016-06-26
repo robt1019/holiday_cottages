@@ -104,7 +104,6 @@
                 }).then(
                     function successCallback(response) {
                         window.alert('cottage reserved');
-                        $scope.updatePage();
                     },
                     function errorCallback(reason) {
                         window.alert('couldn\'t reserve cottage: ' + reason.data);
