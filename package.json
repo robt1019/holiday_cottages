@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "prestart": "npm run test",
-    "test": "karma start ./karma.conf.js",
+    "test": "karma start ./karma.conf.js && mocha test/**/*.js",
     "lint": "jshint public/components/**/*.js test/unit/public/components/**/*.js",
     "pretest": "npm run lint"
   },
@@ -28,6 +28,9 @@
     "karma-mocha": "^1.0.1",
     "mocha": "^2.5.3",
     "sinon": "^1.17.4",
-    "sinon-chai": "^2.8.0"
+    "sinon-chai": "^2.8.0",
+    "superagent": "^2.0.0",
+    "supertest": "^1.2.0",
+    "tape": "^4.6.0"
   }
 }
