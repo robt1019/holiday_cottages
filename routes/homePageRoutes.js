@@ -5,14 +5,9 @@ var mongoose = require('mongoose');
 var Cottage = mongoose.model('Cottage');
 var CottageDate = mongoose.model('CottageDate');
 
-router.get('/cottages', function(req, res, next) {
-    Cottage.find(function(err, cottages) {
-        if (err) {
-            return next(err);
-        }
-        res.json(cottages);
-    });
-});
+var homePageService = require('../services/homePageService');
+
+router.get('/cottages', homePageService.getCottages);
 
 router.post('/cottages', function(req, res, next) {
     var cottage = new Cottage(req.body);

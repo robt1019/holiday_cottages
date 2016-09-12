@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "prestart": "npm run test",
-    "test": "karma start ./karma.conf.js && mocha test/**/*.js",
+    "test": "karma start ./karma.conf.js",
     "lint": "jshint public/components/**/*.js test/unit/public/components/**/*.js",
     "pretest": "npm run lint"
   },
@@ -20,15 +20,12 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
     "jasmine": "^2.4.1",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^1.0.1",
     "karma-jasmine": "^1.0.2",
-    "karma-mocha": "^1.0.1",
-    "mocha": "^2.5.3",
+    "proxyquire": "^1.7.10",
     "sinon": "^1.17.4",
-    "sinon-chai": "^2.8.0",
     "superagent": "^2.0.0",
     "supertest": "^1.2.0",
     "tape": "^4.6.0"

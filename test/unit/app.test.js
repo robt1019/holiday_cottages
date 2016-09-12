@@ -1,17 +1,16 @@
-var expect = require('chai').expect;
-var request = require('superagent');
+var test = require('tape');
+var request = require('supertest');
 
 var app = require('../../app.js');
-var port = 3000;
-var baseUrl = 'localhost:' + port;
 
-describe('app', function() {
-    describe('/cottages', function() {
-        it('should return a 200 status for GET request', function(done) {
-            request.get(baseUrl + '/cottages').end(function assert(err, res) {
-                expect(res).to.have.property('status', 200);
-                done();
-            });
+test('/cottages GET should return 200 response and json format', function(t) {
+    request(app)
+        .get('/cottages')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function assert(err, res) {
+            t.end();
         });
-    });
 });
+
+
